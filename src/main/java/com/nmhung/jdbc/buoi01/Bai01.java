@@ -1,7 +1,13 @@
 package com.nmhung.jdbc.buoi01;
 
 
+import com.nmhung.jdbc.buoi01.dto.Animals;
+import com.nmhung.jdbc.buoi01.dto.User;
+
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bai01 {
 
@@ -20,24 +26,28 @@ public class Bai01 {
 		try {
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			System.out.println(conn);
-			//spring swing
+
 
 			// STEP 4: Execute a query
 			System.out.println("Creating statement...");
 			Statement stmt = conn.createStatement();
 
-			//String sql = "SELECT id, first, last, age FROM Registration";
-			String sql = "select id, name from animals";
+			String sql = "select * from user";
 			ResultSet rs = stmt.executeQuery(sql);
 			// STEP 5: Extract data from result set
+			List<User> list = new ArrayList<>();
 			while (rs.next()) {
-				// Retrieve by column name
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-
-				// Display values
-				System.out.println(id + "\t" + name);
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setFullname(rs.getString("fullname"));
+				user.setId(rs.getInt("id_role"));
+				list.add(user);
 			}
+			list.forEach(item ->{
+				System.out.println(item.getId() + "\t" + item.getFullname());
+			});
 			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
