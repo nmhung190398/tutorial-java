@@ -6,6 +6,7 @@ import java.sql.*;
 public class Bai01 {
 
 	public static void main(String[] args) {
+		//ahaihi đồ ngốc
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException ex) {
